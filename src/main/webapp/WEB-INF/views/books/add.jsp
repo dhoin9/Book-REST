@@ -4,15 +4,20 @@
 <html>
 <head>
     <title>New Book</title>
+
+    <h1>New Book</h1>
 </head>
 <body>
 
 <form:form method="post" modelAttribute="book">
     ISBN: <form:input path="isbn"/>
-         <form:errors path="isbn"/><br/>
+    <form:errors path="isbn" style="color:red"/><br/>
     Title: <form:input path="title"/>
+    <form:errors path="title" style="color:red"/><br/>
     Author <form:input path="author"/>
-    Publisher <form:input path="Publisher"/>
+    <form:errors path="author" style="color:red"/><br/>
+    Publisher <form:input path="publisher"/>
+    <form:errors path="publisher" style="color:red"/><br/>
 
     <input type="submit" value="Save">
 </form:form>

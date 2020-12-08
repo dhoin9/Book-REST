@@ -26,12 +26,16 @@
             <td><c:out value="${book.author}"/></td>
             <td><a href="<c:out value="/admin/books/edit/${book.id}"/>">Edit</a>
                 <a href="<c:out value="/admin/books/details/${book.id}"/>">Details</a>
-                <a href="<c:out value="/admin/books/delete/${book.id}"/>">Delete</a>
+                <a href="<c:out value="/admin/books/delete/${book.id}" />"onclick="return confirm('are sure')";>Delete</a>
             </td>
         </tr>
     </c:forEach>
+
     </tbody>
+
+
 </table>
+<a href="<c:out value="/admin/books/add"/>">Add Book</a>
 </body>
 </html>
 

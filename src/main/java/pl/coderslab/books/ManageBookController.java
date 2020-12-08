@@ -2,11 +2,13 @@ package pl.coderslab.books;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -29,10 +31,15 @@ public class ManageBookController {
         model.addAttribute("book", new Book());
         return "/books/add";}
 
+
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String addForm(Book book){
-        System.out.println(book);
-        bookService.add(book);
+    public String performForm(@Valid Book book, BindingResult result) {
+        if(result.hasErrors()){
+            System.out.println(result);
+            return "/books/add";
+        }else{
+            System.out.println("empty");
+            bookService.add(book);}
         return "redirect:/admin/books/all";}
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -46,8 +53,11 @@ public class ManageBookController {
         return "books/edit";
     }
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    public String editBook(Book book){
-        bookService.update(book);
+    public String editBook(@Valid Book book, BindingResult result){
+        if(result.hasErrors()){
+            return "/books/edit";
+        }else{
+            bookService.add(book);}
         return "redirect:/admin/books/all";}
 
     @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
